@@ -190,22 +190,6 @@ const Header = () => {
               </div>
             </li>
 
-            {/* <!-- Theme toggler --> */}
-
-            <li className="flex">
-              <button
-                className="rounded-md focus:outline-none"
-                onClick={toggleMode}
-                aria-label="Toggle color mode"
-              >
-                {mode === "dark" ? (
-                  <FiSun className="w-5 h-5" aria-hidden="true" />
-                ) : (
-                  <FiMoon className="w-5 h-5" aria-hidden="true" />
-                )}
-              </button>
-            </li>
-
             {/* <!-- Profile menu --> */}
             <li className="relative inline-block text-left" ref={pRef}>
               <button
