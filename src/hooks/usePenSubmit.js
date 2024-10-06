@@ -7,7 +7,7 @@ import { AdminContext } from "@/context/AdminContext";
 import { SidebarContext } from "@/context/SidebarContext";
 import PenServices from "@/services/PenServices";
 import CouponServices from "@/services/CouponServices";
-import { notifyError, notifySuccess } from "@/utils/toast";
+import { notifyError, notifySuccess, notifyWarning } from "@/utils/toast";
 // import useTranslationValue from "./useTranslationValue";
 import useUtilsFunction from "./useUtilsFunction";
 
@@ -36,10 +36,7 @@ const usePenSubmit = (id) => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("theeeeee");
       setIsSubmitting(true);
-
-      console.log("pen submit data", data);
 
       const penData = {
         ...data,
@@ -47,62 +44,44 @@ const usePenSubmit = (id) => {
         STATUS: 0, // Default to 0
       };
 
-      // Check if REGISTER exists
-      if (data.REGISTER) {
-        console.log("data.REGISTER", data.REGISTER);
+      // Wait for the response from getCouponByRegister
+      const res = await CouponServices.getCouponByRegister(data.REGISTER);
 
-        try {
-          // Wait for the response from getCouponByRegister
-          const res = await CouponServices.getCouponByRegister(data.REGISTER);
-
-          if (res) {
-            if (res.IS_INF === 1) {
-              console.log("dawhacleee");
-              penData.STATUS = 1;
-            } else if (res.IS_INF === 0) {
-              console.log("burteeeg");
-              penData.STATUS = 2;
-
-              // try {
-              //   res.IS_INF = 1;
-              //   const res1 = await CouponServices.updateCoupon(res._id, {...res, });
-              // }
-              // await CouponServices.updateCoupon(data.REGISTER, { IS_INF: 1 });
-              // try {
-              //   res.IS_INF = 1;
-              //   await res.save();
-              //   res.send({ message: "Амжилттай шинэчлэгдсэн!" });
-              //   penData.STATUS = 2; // Set status to 2 here
-              // } catch (err) {
-              //   // res.status(404).send({ message: "C not found!" });
-              // }
-            } else {
-              console.log("soninnn");
-            }
-            console.log("penData", penData); // Log the updated penData
-          }
-        } catch (err) {
-          penData.STATUS = 0;
-          notifyError(err?.response?.data?.message || err?.message);
+      if (res) {
+        if (res.IS_INF === 1) {
+          notifyWarning("Давхацсан байна!");
+          penData.STATUS = 1;
+        } else {
+          penData.STATUS = 2;
+          notifySuccess("Амжилттай бүртгэгдлээ!");
+          res.IS_INF = 1;
+          await CouponServices.updateCoupon(res._id, res);
         }
+        console.log("penData", penData); // Log the updated penData
+      } else {
+        penData.STATUS = 0;
+        notifyError("Регистр дугаар олдсонгүй!");
       }
 
-      // If there's an id, update the pen, otherwise add a new one
+      // const res = await PenServices.addPen(penData);
+      // setIsUpdate(true);
+      // setIsSubmitting(false);
+      // closeDrawer();
+
+      ///
+      console.log("penData", penData);
+
       if (id) {
         const res = await PenServices.updatePen(id, penData);
         setIsUpdate(true);
-        notifySuccess(res.message);
+        setIsSubmitting(false);
+        closeDrawer();
       } else {
-        console.log("shine pen nemeh gej baina");
-        console.log("penData", penData);
         const res = await PenServices.addPen(penData);
-        console.log("after adding in front", res);
         setIsUpdate(true);
-        notifySuccess(res.message);
+        setIsSubmitting(false);
+        closeDrawer();
       }
-
-      setIsSubmitting(false);
-      closeDrawer();
     } catch (err) {
       notifyError(err?.response?.data?.message || err?.message);
       setIsSubmitting(false);

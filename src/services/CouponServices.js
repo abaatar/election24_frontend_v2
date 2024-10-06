@@ -15,8 +15,6 @@ const CouponServices = {
   },
   getCouponByRegister: async (register) => {
     // New method for getting coupons by register
-    console.log("ttttttt");
-
     return requests.get(`/coupon/register/${register}`);
   },
   updateCoupon: async (id, body) => {

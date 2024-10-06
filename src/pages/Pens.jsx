@@ -116,7 +116,6 @@ const Pens = () => {
     ff();
   }, [getCallback]);
 
-  // console.log("data", data.length);
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
 
@@ -185,6 +184,32 @@ const Pens = () => {
                     handleRemoveSelectFile={handleRemoveSelectFile}
                   />
                 </div>
+                <div className="p-4 rounded-lg bg-gradient-to-r from-green-200 via-blue-200 to-red-200 shadow-lg text-center flex justify-around items-center space-x-8">
+                  <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold text-green-600">
+                      Амжилттай
+                    </span>
+                    <span className="text-5xl font-bold text-green-700 animate-bounce">
+                      {data.filter((item) => item.STATUS === 2).length}
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold text-blue-600">
+                      Давхардсан
+                    </span>
+                    <span className="text-5xl font-bold text-blue-700">
+                      {data.filter((item) => item.STATUS === 1).length}
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-lg font-semibold text-red-600">
+                      Алдаа
+                    </span>
+                    <span className="text-5xl font-bold text-red-700">
+                      {data.filter((item) => item.STATUS === 0).length}
+                    </span>
+                  </div>
+                </div>
 
                 <div className="lg:flex  md:flex xl:justify-end xl:w-1/2  md:w-full md:justify-start flex-grow-0">
                   <div className="w-full md:w-40 lg:w-40 xl:w-40 mr-3 mb-3 lg:mb-0">
@@ -230,7 +255,7 @@ const Pens = () => {
           </Card>
         )}
 
-        <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
+        {/* <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
           <CardBody>
             <div className="py-3 grid gap-4 lg:gap-6 xl:gap-6 md:flex xl:flex">
               <div>
@@ -306,9 +331,9 @@ const Pens = () => {
               </div>
             </div>
           </CardBody>
-        </Card>
+        </Card> */}
 
-        <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
+        {/* <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
           <CardBody>
             <form
               onSubmit={(e) => {
@@ -394,7 +419,7 @@ const Pens = () => {
               </div>
             </form>
           </CardBody>
-        </Card>
+        </Card> */}
       </AnimatedContent>
 
       {loading ? (
