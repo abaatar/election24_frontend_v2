@@ -45,7 +45,7 @@ const Coupons = () => {
   const [searchLastName, setSearchLastName] = useState("");
   const [searchFirstName, setSearchFirstName] = useState("");
   const [searchHoroo, setSearchHoroo] = useState("");
-  const [searchAimag, setSearchAimag] = useState("");
+  const [searchAddress, setSearchAddress] = useState("");
   const [searchSum, setSearchSum] = useState("");
   const [searchPhone, setSearchPhone] = useState("");
   const [searchIsInf, setSearchIsInf] = useState(-1);
@@ -56,7 +56,7 @@ const Coupons = () => {
   const lastNameRef = useRef("");
   const firstNameRef = useRef("");
   const horooRef = useRef("");
-  const aimagRef = useRef("");
+  const addressRef = useRef("");
   const sumRef = useRef("");
   const phoneRef = useRef("");
   const isInfRef = useRef("");
@@ -73,7 +73,7 @@ const Coupons = () => {
     q.append("lastName", searchLastName);
     q.append("firstName", searchFirstName);
     q.append("horoo", searchHoroo);
-    q.append("aimag", searchAimag);
+    q.append("address", searchAddress);
     q.append("sum", searchSum);
     q.append("phone", searchPhone);
     q.append("isInf", searchIsInf);
@@ -93,7 +93,7 @@ const Coupons = () => {
     searchLastName,
     searchFirstName,
     searchHoroo,
-    searchAimag,
+    searchAddress,
     searchSum,
     searchPhone,
     searchIsInf,
@@ -148,7 +148,7 @@ const Coupons = () => {
     lastNameRef.current.value = "";
     firstNameRef.current.value = "";
     horooRef.current.value = "";
-    aimagRef.current.value = "";
+    addressRef.current.value = "";
     sumRef.current.value = "";
     phoneRef.current.value = "";
     isInfRef.current.value = -1;
@@ -321,7 +321,7 @@ const Coupons = () => {
                 setSearchLastName(lastNameRef.current.value);
                 setSearchFirstName(firstNameRef.current.value);
                 setSearchHoroo(horooRef.current.value);
-                setSearchAimag(aimagRef.current.value);
+                setSearchAddress(addressRef.current.value);
                 setSearchSum(sumRef.current.value);
                 setSearchPhone(phoneRef.current.value);
                 setSearchIsInf(isInfRef.current.value);
@@ -351,7 +351,7 @@ const Coupons = () => {
               </div>
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-                <Input ref={aimagRef} type="search" placeholder={"Т/Аймаг"} />
+                <Input ref={addressRef} type="search" placeholder={"Хаяг"} />
               </div>
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
@@ -415,7 +415,7 @@ const Coupons = () => {
                 <TableCell>Байгууллага</TableCell>
                 <TableCell>Утас 1</TableCell>
                 <TableCell>Утас 2</TableCell>
-                <TableCell>Үүр</TableCell>
+                {/* <TableCell>Үүр</TableCell>
                 <TableCell>Сонгуулийн Байршил</TableCell>
                 <TableCell>Санал Огноо</TableCell>
                 <TableCell>Төрсөн Аймаг</TableCell>
@@ -434,7 +434,7 @@ const Coupons = () => {
                 <TableCell>APARTMENT</TableCell>
                 <TableCell>X</TableCell>
                 <TableCell>Y</TableCell>
-                <TableCell>Z</TableCell>
+                <TableCell>Z</TableCell> */}
 
                 {/* <TableCell className="text-center">
                   {t("catPublishedTbl")}
@@ -442,12 +442,12 @@ const Coupons = () => {
                 {/* <TableCell>{t("CoupTblStartDate")}</TableCell>
                 <TableCell>{t("CoupTblEndDate")}</TableCell> */}
                 {/* <TableCell>{t("CoupTblStatus")}</TableCell> */}
-                <TableCell
+                {/* <TableCell
                   className="sticky right-0 z-10 bg-teal-800 text-right text-white"
                   style={{ boxShadow: "1px 0 5px rgba(0, 0, 0, 0.1)" }}
                 >
                   {t("CoupTblActions")}
-                </TableCell>
+                </TableCell> */}
               </tr>
             </TableHeader>
             <CouponTable

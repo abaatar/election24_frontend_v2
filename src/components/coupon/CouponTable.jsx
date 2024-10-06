@@ -161,7 +161,7 @@ const CouponTable = ({ isCheck, coupons, setIsCheck }) => {
               </div>{" "}
             </TableCell>
 
-            <TableCell>
+            {/* <TableCell>
               <div className="flex items-center">
                 <div>
                   <span className="text-sm">{coupon.UUR}</span>{" "}
@@ -319,7 +319,7 @@ const CouponTable = ({ isCheck, coupons, setIsCheck }) => {
                   <span className="text-sm">{coupon.Z}</span>{" "}
                 </div>
               </div>{" "}
-            </TableCell>
+            </TableCell> */}
 
             {/* <TableCell className="text-center">
               <ShowHideButton id={coupon._id} status={coupon.status} />
@@ -331,7 +331,7 @@ const CouponTable = ({ isCheck, coupons, setIsCheck }) => {
               </span>
             </TableCell> */}
 
-            <TableCell
+            {/* <TableCell
               className="sticky right-0 z-10 bg-teal-800 text-right text-white"
               style={{ boxShadow: "1px 0 5px rgba(0, 0, 0, 0.1)" }}
             >
@@ -342,7 +342,7 @@ const CouponTable = ({ isCheck, coupons, setIsCheck }) => {
                 handleModalOpen={handleModalOpen}
                 title={showingTranslateValue(coupon?.title)}
               />
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         ))}
       </TableBody>
