@@ -98,7 +98,11 @@ const CouponTable = ({ isCheck, coupons, setIsCheck }) => {
             <TableCell>
               <div className="flex items-center">
                 <div>
-                  <span className="text-sm">{coupon.IS_INF}</span>{" "}
+                  {coupon.IS_INF === 0 ? (
+                    <span className="text-sm text-gray-500">Тодорхойгүй</span>
+                  ) : (
+                    <span className="text-sm text-green-500">Дэмжсэн</span>
+                  )}
                 </div>
               </div>{" "}
             </TableCell>

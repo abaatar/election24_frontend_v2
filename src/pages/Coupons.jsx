@@ -247,7 +247,7 @@ const Coupons = () => {
                     textAlign: "center",
                   }}
                 >
-                  Нөлөөлсөн
+                  Дэмжсэн
                 </div>
                 <Select
                   ref={isInfRef}
@@ -407,7 +407,7 @@ const Coupons = () => {
                 <TableCell>Регистр</TableCell>
                 <TableCell>Овог</TableCell>
                 <TableCell>Нэр</TableCell>
-                <TableCell>IS_INF</TableCell>
+                <TableCell>Дэмжсэн</TableCell>
                 <TableCell>Нас</TableCell>
                 <TableCell>Хүйс</TableCell>
                 <TableCell>Хороо</TableCell>
