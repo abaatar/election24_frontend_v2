@@ -8,7 +8,7 @@ const NotFound = () => {
         <div className="block justify-items-stretch mx-auto items-center text-center">
           {/* <img width={650} height={450} src={notFound} alt="404" /> */}
           <h2 className="font-bold font-serif font-2xl lg:text-4xl leading-7 mb-4">
-            Page is not found or it's secret!
+            nothing here!
           </h2>
           <a
             href="/"
