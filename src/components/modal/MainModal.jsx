@@ -7,6 +7,7 @@ import { FiTrash2 } from "react-icons/fi";
 import CustomerServices from "@/services/CustomerServices";
 import AdminServices from "@/services/AdminServices";
 import CouponServices from "@/services/CouponServices";
+import PenServices from "@/services/PenServices";
 import ProductServices from "@/services/ProductServices";
 import CategoryServices from "@/services/CategoryServices";
 import { SidebarContext } from "@/context/SidebarContext";
@@ -61,6 +62,17 @@ const MainModal = ({ id, title }) => {
       closeModal();
       setServiceId();
     }
+    if (location.pathname === "/influence") {
+      PenServices.deletePen(id)
+        .then((res) => {
+          setIsUpdate(true);
+          notifySuccess(res.message);
+        })
+        .catch((err) => notifyError(err.message));
+      closeModal();
+      setServiceId();
+    }
+
     if (location.pathname === "/our-staff") {
       AdminServices.deleteStaff(id)
         .then((res) => {

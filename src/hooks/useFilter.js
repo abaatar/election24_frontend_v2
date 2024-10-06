@@ -11,6 +11,7 @@ import { SidebarContext } from "@/context/SidebarContext";
 import AttributeServices from "@/services/AttributeServices";
 import CategoryServices from "@/services/CategoryServices";
 import CouponServices from "@/services/CouponServices";
+import PenServices from "@/services/PenServices";
 import CurrencyServices from "@/services/CurrencyServices";
 import CustomerServices from "@/services/CustomerServices";
 import LanguageServices from "@/services/LanguageServices";
@@ -80,6 +81,14 @@ const couponSchema = {
     // REGISTER: { type: "string" },
   },
 };
+const penSchema = {
+  type: "object",
+  properties: {
+    REGISTER: { type: "string" },
+    LAST_NAME: { type: "string" },
+    FIRST_NAME: { type: "string" },
+  },
+};
 const customerSchema = {
   type: "object",
   properties: {
@@ -97,6 +106,7 @@ const useFilter = (data) => {
   const [searchText, setSearchText] = useState("");
   const [searchUser, setSearchUser] = useState("");
   const [searchCoupon, setSearchCoupon] = useState("");
+  const [searchPen, setSearchPen] = useState("");
   const [searchOrder, setSearchOrder] = useState("");
   const [categoryType, setCategoryType] = useState("");
   const [attributeTitle, setAttributeTitle] = useState("");
@@ -124,6 +134,7 @@ const useFilter = (data) => {
   const searchRef = useRef("");
   const userRef = useRef("");
   const couponRef = useRef("");
+  const penRef = useRef("");
   const orderRef = useRef("");
   const categoryRef = useRef("");
   const attributeRef = useRef("");
@@ -261,6 +272,16 @@ const useFilter = (data) => {
           )
       );
     }
+    //Pen filtering
+    if (searchPen) {
+      services = services?.filter(
+        (search) =>
+          search?.LAST_NAME?.toLowerCase()?.includes(
+            searchPen?.toLowerCase()
+          ) ||
+          search?.FIRST_NAME?.toLowerCase().includes(searchPen?.toLowerCase())
+      );
+    }
     // order filtering
     if (status) {
       services = services.filter((order) => order.status === status);
@@ -322,6 +343,7 @@ const useFilter = (data) => {
     role,
     searchUser,
     searchCoupon,
+    searchPen,
     status,
     searchOrder,
     country,
@@ -360,6 +382,10 @@ const useFilter = (data) => {
   const handleSubmitCoupon = (e) => {
     e.preventDefault();
     setSearchCoupon(couponRef.current.value);
+  };
+  const handleSubmitPen = (e) => {
+    e.preventDefault();
+    setSearchPen(penRef.current.value);
   };
   const handleSubmitOrder = (e) => {
     e.preventDefault();
@@ -460,6 +486,11 @@ const useFilter = (data) => {
             return value;
           });
         }
+        if (location.pathname === "/influence") {
+          data = text.map((value) => {
+            return value;
+          });
+        }
         if (location.pathname === "/customers") {
           data = text.map((value) => {
             return {
@@ -512,6 +543,11 @@ const useFilter = (data) => {
         }
 
         if (location.pathname === "/coupons") {
+          data = json.map((value) => {
+            return value;
+          });
+        }
+        if (location.pathname === "/influence") {
           data = json.map((value) => {
             return value;
           });
@@ -616,6 +652,30 @@ const useFilter = (data) => {
           notifyError("Please enter valid data!");
         }
       }
+      if (location.pathname === "/influence") {
+        setLoading(true);
+        let attributeDataValidation = selectedFile.map((value) =>
+          ajv.validate(penSchema, value)
+        );
+
+        const isBelowThreshold = (currentValue) => currentValue === true;
+        const validationData = attributeDataValidation.every(isBelowThreshold);
+
+        if (validationData) {
+          PenServices.addAllPen(selectedFile)
+            .then((res) => {
+              setLoading(false);
+              setIsUpdate(true);
+              notifySuccess(res.message);
+            })
+            .catch((err) => {
+              setLoading(false);
+              notifyError(err ? err.response.data.message : err.message);
+            });
+        } else {
+          notifyError("Please enter valid data!");
+        }
+      }
       if (location.pathname === "/attributes") {
         setLoading(true);
         let attributeDataValidation = selectedFile.map((value) =>
@@ -678,6 +738,7 @@ const useFilter = (data) => {
     userRef,
     searchRef,
     couponRef,
+    penRef,
     orderRef,
     categoryRef,
     attributeRef,
@@ -715,11 +776,13 @@ const useFilter = (data) => {
     resultsPerPage,
     handleOnDrop,
     setSearchCoupon,
+    setSearchPen,
     setAttributeTitle,
     handleSelectFile,
     handleSubmitUser,
     handleSubmitForAll,
     handleSubmitCoupon,
+    handleSubmitPen,
     handleSubmitOrder,
     handleSubmitCategory,
     handleSubmitAttribute,

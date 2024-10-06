@@ -10,6 +10,7 @@ const InputArea = ({
   type,
   autoComplete,
   placeholder,
+  disabled,
 }) => {
   return (
     <>
@@ -22,6 +23,7 @@ const InputArea = ({
         placeholder={placeholder}
         name={name}
         autoComplete={autoComplete}
+        disabled={disabled}
         className="mr-2 h-12 p-2"
       />
     </>

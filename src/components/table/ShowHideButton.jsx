@@ -7,6 +7,7 @@ import { SidebarContext } from "@/context/SidebarContext";
 import AttributeServices from "@/services/AttributeServices";
 import CategoryServices from "@/services/CategoryServices";
 import CouponServices from "@/services/CouponServices";
+import PenServices from "@/services/PenServices";
 import CurrencyServices from "@/services/CurrencyServices";
 import LanguageServices from "@/services/LanguageServices";
 import ProductServices from "@/services/ProductServices";
@@ -86,6 +87,15 @@ const ShowHideButton = ({ id, status, category, currencyStatusName }) => {
       if (location.pathname === "/coupons") {
         // console.log('coupns',id)
         const res = await CouponServices.updateStatus(id, {
+          status: newStatus,
+        });
+        setIsUpdate(true);
+        notifySuccess(res.message);
+      }
+
+      if (location.pathname === "/influence") {
+        // console.log('pens',id)
+        const res = await PenServices.updateStatus(id, {
           status: newStatus,
         });
         setIsUpdate(true);

@@ -23,9 +23,14 @@ const sidebar = [
     name: "Dashboard", // name that appear in Sidebar
   },
   {
-    path: "/people", // the url
+    path: "/coupons", // the url
     icon: FiUsers, // icon
     name: "People", // name that appear in Sidebar
+  },
+  {
+    path: "/influence", // the url
+    icon: FiUsers, // icon
+    name: "Influence", // name that appear in Sidebar
   },
 
   // {

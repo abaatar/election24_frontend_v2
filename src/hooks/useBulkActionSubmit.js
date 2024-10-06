@@ -7,6 +7,7 @@ import { SidebarContext } from "@/context/SidebarContext";
 import AttributeServices from "@/services/AttributeServices";
 import CategoryServices from "@/services/CategoryServices";
 import CouponServices from "@/services/CouponServices";
+import PenServices from "@/services/PenServices";
 import CurrencyServices from "@/services/CurrencyServices";
 import LanguageServices from "@/services/LanguageServices";
 import ProductServices from "@/services/ProductServices";
@@ -98,6 +99,13 @@ const useBulkActionSubmit = (ids, lang = "en", childId) => {
         status: published ? "show" : "hide",
       };
 
+      const penData = {
+        ids: ids,
+        startTime: data.startTime,
+        endTime: data.endTime,
+        status: published ? "show" : "hide",
+      };
+
       if (location.pathname === "/products") {
         // console.log("productData", productData);
         const res = await ProductServices.updateManyProducts(productData);
@@ -108,6 +116,13 @@ const useBulkActionSubmit = (ids, lang = "en", childId) => {
 
       if (location.pathname === "/coupons") {
         const res = await CouponServices.updateManyCoupons(couponData);
+        setIsUpdate(true);
+        notifySuccess(res.message);
+        closeBulkDrawer();
+      }
+
+      if (location.pathname === "/influence") {
+        const res = await PenServices.updateManyPens(penData);
         setIsUpdate(true);
         notifySuccess(res.message);
         closeBulkDrawer();
