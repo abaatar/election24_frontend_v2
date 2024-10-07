@@ -137,7 +137,7 @@ const PenTable = ({ isCheck, pens, setIsCheck }) => {
               </span>
             </TableCell> */}
 
-            <TableCell
+            {/* <TableCell
               className="sticky right-0 z-10 bg-teal-800 text-right text-white"
               style={{ boxShadow: "1px 0 5px rgba(0, 0, 0, 0.1)" }}
             >
@@ -148,7 +148,7 @@ const PenTable = ({ isCheck, pens, setIsCheck }) => {
                 handleModalOpen={handleModalOpen}
                 title={showingTranslateValue(pen?.title)}
               />
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         ))}
       </TableBody>

@@ -88,6 +88,13 @@ const UploadMany = ({
         exportType: exportFromJSON.types.csv,
       });
     }
+    if (location.pathname === "/influence") {
+      exportFromJSON({
+        data: exportData,
+        fileName: "influence",
+        exportType: exportFromJSON.types.csv,
+      });
+    }
     if (location.pathname === "/customers") {
       exportFromJSON({
         data: exportData,
@@ -144,6 +151,13 @@ const UploadMany = ({
         exportType: exportFromJSON.types.json,
       });
     }
+    if (location.pathname === "/influence") {
+      exportFromJSON({
+        data: exportData,
+        fileName: "influence",
+        exportType: exportFromJSON.types.json,
+      });
+    }
     if (location.pathname === "/customers") {
       exportFromJSON({
         data: exportData,
@@ -170,6 +184,7 @@ const UploadMany = ({
             title === "Attribute" ||
             title === "Extra" ||
             title === "Coupon" ||
+            title === "Pen" ||
             title === "Customers" ||
             title === "Categories") && (
             <button

@@ -209,7 +209,7 @@ const Header = () => {
             {/* <!-- Profile menu --> */}
             <li className="relative inline-block text-left" ref={pRef}>
               <button
-                className="rounded-full dark:bg-gray-500 bg-emerald-500 text-white h-8 w-full font-medium px-4 mx-auto focus:outline-none"
+                className="rounded-full border text-white h-8 w-full font-medium px-4 mx-auto focus:outline-none"
                 onClick={handleProfileOpen}
               >
                 <span>{adminInfo.name.toUpperCase()}</span>

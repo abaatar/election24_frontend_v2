@@ -436,6 +436,59 @@ const useFilter = (data) => {
         .catch((err) => notifyError(err.message));
     }
   };
+
+  /////
+  async function processPens(selectedFile) {
+    const updatedPens = [];
+
+    for (const pen of selectedFile) {
+      // console.log("pen", pen);
+      let stats = 0;
+
+      try {
+        const res = await CouponServices.getCouponByRegister(pen.REGISTER);
+        // console.log("pen=", pen, "res=", res);
+
+        if (res) {
+          if (res.IS_INF === 0) {
+            stats = 2;
+            res.IS_INF = 1;
+            await CouponServices.updateCoupon(res._id, res);
+          } else {
+            stats = 1;
+          }
+        } else {
+          stats = 0;
+        }
+      } catch (err) {
+        notifyError(err ? err.response.data.message : err.message);
+      }
+
+      // Add the updated pen to the array
+      updatedPens.push({
+        ...pen,
+        STATUS: stats,
+      });
+    }
+
+    // console.log("updatedPens", updatedPens);
+
+    // Now call addAllPen with the updated pens
+    try {
+      const res = await PenServices.addAllPen(updatedPens);
+      setLoading(false);
+      setIsUpdate(true);
+      notifySuccess(res.message);
+    } catch (err) {
+      setLoading(false);
+      notifyError(err ? err.response.data.message : err.message);
+    }
+  }
+
+  // Call the function with the selectedFile
+
+  /////
+
   const handleSelectFile = (e) => {
     e.preventDefault();
     // return notifyError("This feature is disabled for demo!");
@@ -638,7 +691,7 @@ const useFilter = (data) => {
         const validationData = attributeDataValidation.every(isBelowThreshold);
 
         if (validationData) {
-          CouponServices.addAllCoupon(selectedFile)
+          CouponServices.addAllCoupon(selectedFile.slice(85000, 87553))
             .then((res) => {
               setLoading(false);
               setIsUpdate(true);
@@ -662,16 +715,9 @@ const useFilter = (data) => {
         const validationData = attributeDataValidation.every(isBelowThreshold);
 
         if (validationData) {
-          PenServices.addAllPen(selectedFile)
-            .then((res) => {
-              setLoading(false);
-              setIsUpdate(true);
-              notifySuccess(res.message);
-            })
-            .catch((err) => {
-              setLoading(false);
-              notifyError(err ? err.response.data.message : err.message);
-            });
+          // console.log("selectedFile", selectedFile.length);
+
+          processPens(selectedFile);
         } else {
           notifyError("Please enter valid data!");
         }

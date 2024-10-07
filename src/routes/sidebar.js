@@ -29,7 +29,7 @@ const sidebar = [
   },
   {
     path: "/influence", // the url
-    icon: FiUsers, // icon
+    icon: FiGlobe, // icon
     name: "Influence", // name that appear in Sidebar
   },
 
@@ -67,11 +67,11 @@ const sidebar = [
   //   name: "Orders",
   // },
 
-  {
-    path: "/our-staff",
-    icon: FiSettings,
-    name: "OurStaff",
-  },
+  // {
+  //   path: "/our-staff",
+  //   icon: FiSettings,
+  //   name: "OurStaff",
+  // },
 
   // {
   //   path: "/settings?settingTab=common-settings",

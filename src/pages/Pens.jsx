@@ -42,26 +42,18 @@ const Pens = () => {
   const { toggleDrawer, lang } = useContext(SidebarContext);
 
   const [searchRegister, setSearchRegister] = useState("");
-  const [searchLastName, setSearchLastName] = useState("");
-  const [searchFirstName, setSearchFirstName] = useState("");
-  const [searchHoroo, setSearchHoroo] = useState("");
-  const [searchAimag, setSearchAimag] = useState("");
-  const [searchSum, setSearchSum] = useState("");
-  const [searchPhone, setSearchPhone] = useState("");
-  const [searchIsInf, setSearchIsInf] = useState(-1);
-  const [searchIsMan, setSearchIsMan] = useState(-1);
-  const [searchIsAn, setSearchIsAn] = useState(-1);
+  const [searchTolgoi1, setSearchTolgoi1] = useState("");
+  const [searchTolgoi2, setSearchTolgoi2] = useState("");
+  const [searchTolgoi3, setSearchTolgoi3] = useState("");
+  const [searchRelation, setSearchRelation] = useState(-1);
+  const [searchStatus, setSearchStatus] = useState(-1);
 
   const registerRef = useRef("");
-  const lastNameRef = useRef("");
-  const firstNameRef = useRef("");
-  const horooRef = useRef("");
-  const aimagRef = useRef("");
-  const sumRef = useRef("");
-  const phoneRef = useRef("");
-  const isInfRef = useRef("");
-  const isManRef = useRef("");
-  const isAnRef = useRef("");
+  const tolgoi1Ref = useRef("");
+  const tolgoi2Ref = useRef("");
+  const tolgoi3Ref = useRef("");
+  const relationRef = useRef("");
+  const statusRef = useRef("");
 
   const [error, setError] = useState("");
 
@@ -69,21 +61,12 @@ const Pens = () => {
     setError("");
     const q = new URLSearchParams();
 
-    console.log("dfsddsfdsfsfsfsfsfs");
-
-    console.log(" adminInfo.name", adminInfo.name);
-
-    q.append("tolgoi1", adminInfo.name);
     q.append("register", searchRegister);
-    q.append("lastName", searchLastName);
-    q.append("firstName", searchFirstName);
-    q.append("horoo", searchHoroo);
-    q.append("aimag", searchAimag);
-    q.append("sum", searchSum);
-    q.append("phone", searchPhone);
-    q.append("isInf", searchIsInf);
-    q.append("isMan", searchIsMan);
-    q.append("isAn", searchIsAn);
+    q.append("tolgoi1", searchTolgoi1);
+    q.append("tolgoi2", searchTolgoi2);
+    q.append("tolgoi3", searchTolgoi3);
+    q.append("relation", searchRelation);
+    q.append("status", searchStatus);
 
     try {
       const resp = await PenServices.getAllPens(q);
@@ -95,15 +78,11 @@ const Pens = () => {
     return [];
   }, [
     searchRegister,
-    searchLastName,
-    searchFirstName,
-    searchHoroo,
-    searchAimag,
-    searchSum,
-    searchPhone,
-    searchIsInf,
-    searchIsMan,
-    searchIsAn,
+    searchTolgoi1,
+    searchTolgoi2,
+    searchTolgoi3,
+    searchRelation,
+    searchStatus,
   ]);
 
   const loading = false;
@@ -149,10 +128,11 @@ const Pens = () => {
   const handleResetField = () => {
     setSearchPen("");
     registerRef.current.value = "";
-    lastNameRef.current.value = "";
-    firstNameRef.current.value = "";
-    isManRef.current.value = -1;
-    isAnRef.current.value = -1;
+    tolgoi1Ref.current.value = "";
+    tolgoi2Ref.current.value = "";
+    tolgoi3Ref.current.value = "";
+    relationRef.current.value = -1;
+    statusRef.current.value = -1;
   };
 
   return (
@@ -212,7 +192,7 @@ const Pens = () => {
                 </div>
 
                 <div className="lg:flex  md:flex xl:justify-end xl:w-1/2  md:w-full md:justify-start flex-grow-0">
-                  <div className="w-full md:w-40 lg:w-40 xl:w-40 mr-3 mb-3 lg:mb-0">
+                  {/* <div className="w-full md:w-40 lg:w-40 xl:w-40 mr-3 mb-3 lg:mb-0">
                     <Button
                       disabled={isCheck.length < 1}
                       onClick={() => handleUpdateMany(isCheck)}
@@ -223,9 +203,9 @@ const Pens = () => {
                       </span>
                       {t("BulkAction")}
                     </Button>
-                  </div>
+                  </div> */}
 
-                  <div className="w-full md:w-32 lg:w-32 xl:w-32 mr-3 mb-3 lg:mb-0">
+                  {/* <div className="w-full md:w-32 lg:w-32 xl:w-32 mr-3 mb-3 lg:mb-0">
                     <Button
                       disabled={isCheck.length < 1}
                       onClick={() => handleDeleteMany(isCheck)}
@@ -236,7 +216,7 @@ const Pens = () => {
                       </span>
                       Устгах
                     </Button>
-                  </div>
+                  </div> */}
 
                   <div className="w-full md:w-48 lg:w-48 xl:w-48">
                     <Button
@@ -333,21 +313,17 @@ const Pens = () => {
           </CardBody>
         </Card> */}
 
-        {/* <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
+        <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
           <CardBody>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 setSearchRegister(registerRef.current.value);
-                setSearchLastName(lastNameRef.current.value);
-                setSearchFirstName(firstNameRef.current.value);
-                setSearchHoroo(horooRef.current.value);
-                setSearchAimag(aimagRef.current.value);
-                setSearchSum(sumRef.current.value);
-                setSearchPhone(phoneRef.current.value);
-                setSearchIsInf(isInfRef.current.value);
-                setSearchIsMan(isManRef.current.value);
-                setSearchIsAn(isAnRef.current.value);
+                setSearchTolgoi1(tolgoi1Ref.current.value);
+                setSearchTolgoi2(tolgoi2Ref.current.value);
+                setSearchTolgoi3(tolgoi3Ref.current.value);
+                setSearchRelation(relationRef.current.value);
+                setSearchStatus(statusRef.current.value);
               }}
               className="py-3 grid gap-4 lg:gap-6 xl:gap-6 md:flex xl:flex"
             >
@@ -361,42 +337,34 @@ const Pens = () => {
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
                 <Input
-                  ref={lastNameRef}
+                  ref={tolgoi1Ref}
                   type="search"
-                  placeholder={"TOLGOI_1"}
+                  placeholder={"Толгой 1"}
                 />
               </div>
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
                 <Input
-                  ref={firstNameRef}
+                  ref={tolgoi2Ref}
                   type="search"
-                  placeholder={"TOLGOI_2"}
+                  placeholder={"Толгой 2"}
                 />
               </div>
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
                 <Input
-                  ref={firstNameRef}
+                  ref={tolgoi3Ref}
                   type="search"
-                  placeholder={"TOLGOI_3"}
+                  placeholder={"Толгой 3"}
                 />
               </div>
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-                <Input
-                  ref={firstNameRef}
-                  type="search"
-                  placeholder={"RELATION"}
-                />
+                <Input ref={relationRef} type="search" placeholder={"Холбоо"} />
               </div>
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-                <Input
-                  ref={firstNameRef}
-                  type="search"
-                  placeholder={"STATUS"}
-                />
+                <Input ref={statusRef} type="search" placeholder={"Статус"} />
               </div>
 
               <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
@@ -419,7 +387,7 @@ const Pens = () => {
               </div>
             </form>
           </CardBody>
-        </Card> */}
+        </Card>
       </AnimatedContent>
 
       {loading ? (
@@ -442,11 +410,11 @@ const Pens = () => {
                   />
                 </TableCell>
                 <TableCell>Регистр</TableCell>
-                <TableCell>TOLGOI_1</TableCell>
-                <TableCell>TOLGOI_2</TableCell>
-                <TableCell>TOLGOI_3</TableCell>
-                <TableCell>RELATION </TableCell>
-                <TableCell>STATUS</TableCell>
+                <TableCell>Толгой 1</TableCell>
+                <TableCell>Толгой 2</TableCell>
+                <TableCell>Толгой 3</TableCell>
+                <TableCell>Холбоо</TableCell>
+                <TableCell>Статус</TableCell>
 
                 {/* <TableCell className="text-center">
                   {t("catPublishedTbl")}
@@ -454,12 +422,12 @@ const Pens = () => {
                 {/* <TableCell>{t("CoupTblStartDate")}</TableCell>
                 <TableCell>{t("CoupTblEndDate")}</TableCell> */}
                 {/* <TableCell>{t("CoupTblStatus")}</TableCell> */}
-                <TableCell
+                {/* <TableCell
                   className="sticky right-0 z-10 bg-teal-800 text-right text-white"
                   style={{ boxShadow: "1px 0 5px rgba(0, 0, 0, 0.1)" }}
                 >
                   {t("CoupTblActions")}
-                </TableCell>
+                </TableCell> */}
               </tr>
             </TableHeader>
             <PenTable
@@ -479,7 +447,7 @@ const Pens = () => {
           </TableFooter>
         </TableContainer>
       ) : (
-        <NotFound title="Илэрч олдсонгүй." />
+        <NotFound title="Илэрц олдсонгүй." />
       )}
     </>
   );
