@@ -49,7 +49,11 @@ const Layout = () => {
             <Suspense fallback={<ThemeSuspense />}>
               <Switch>
                 {routes.map((route, i) => {
-                  if (route.path === "/coupons") {
+                  if (
+                    route.path === "/dashboard" ||
+                    route.path === "/coupons" ||
+                    route.path === "/person"
+                  ) {
                     // Allow everyone access to /dashboard
                     return route.component ? (
                       <Route
