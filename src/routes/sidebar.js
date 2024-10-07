@@ -23,6 +23,11 @@ const sidebar = [
     name: "Dashboard", // name that appear in Sidebar
   },
   {
+    path: "/person", // the url
+    icon: FiUser, // icon
+    name: "Search", // name that appear in Sidebar
+  },
+  {
     path: "/coupons", // the url
     icon: FiUsers, // icon
     name: "People", // name that appear in Sidebar
