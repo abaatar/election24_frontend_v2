@@ -100,6 +100,18 @@ const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
             <TableCell>
               <div className="flex items-center">
                 <div>
+                  {coupon.X === "0" ? (
+                    <span className="text-sm text-gray-500">Өгөөгүй</span>
+                  ) : (
+                    <span className="text-sm text-green-500">Өгсөн</span>
+                  )}
+                </div>
+              </div>{" "}
+            </TableCell>
+
+            <TableCell>
+              <div className="flex items-center">
+                <div>
                   <span className="text-sm">{coupon.AGE}</span>{" "}
                 </div>
               </div>{" "}

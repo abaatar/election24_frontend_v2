@@ -304,6 +304,7 @@ const Person = () => {
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
+                  <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
                   <TableCell>Хороо</TableCell>
@@ -366,6 +367,7 @@ const Person = () => {
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
+                  <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
                   <TableCell>Хороо</TableCell>
@@ -404,6 +406,7 @@ const Person = () => {
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
+                  <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
                   <TableCell>Хороо</TableCell>
@@ -442,6 +445,7 @@ const Person = () => {
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
+                  <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
                   <TableCell>Хороо</TableCell>
