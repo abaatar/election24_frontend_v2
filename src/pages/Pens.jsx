@@ -146,7 +146,7 @@ const Pens = () => {
       </MainDrawer>
 
       <AnimatedContent>
-        {adminInfo.role === "Admin" && (
+        {adminInfo.name !== "guest" && (
           <Card className="min-w-0 shadow-xs overflow-hidden bg-white dark:bg-gray-800 mb-5">
             <CardBody>
               <form

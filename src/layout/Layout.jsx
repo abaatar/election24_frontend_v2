@@ -51,8 +51,7 @@ const Layout = () => {
                 {routes.map((route, i) => {
                   if (
                     route.path === "/dashboard" ||
-                    route.path === "/coupons" ||
-                    route.path === "/person"
+                    route.path === "/coupons"
                   ) {
                     // Allow everyone access to /dashboard
                     return route.component ? (
@@ -64,7 +63,7 @@ const Layout = () => {
                       />
                     ) : null;
                   } else {
-                    return route.component && adminInfo.role === "Admin" ? (
+                    return route.component && adminInfo.name !== "guest" ? (
                       <Route
                         key={i}
                         exact={true}
