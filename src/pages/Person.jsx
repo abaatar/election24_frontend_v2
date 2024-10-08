@@ -355,18 +355,18 @@ const Person = () => {
             <Table>
               <TableHeader>
                 <tr>
-                  <TableCell>Регистр</TableCell>
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
+                  <TableCell>Хороо</TableCell>
+                  <TableCell>Утас 1</TableCell>
+                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Регистр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
                   <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Хаяг</TableCell>
                   <TableCell>Байгууллага</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Хаяг</TableCell>
                   {/* <TableCell>Үүр</TableCell>
                 <TableCell>Сонгуулийн Байршил</TableCell>
                 <TableCell>Санал Огноо</TableCell>
@@ -418,18 +418,18 @@ const Person = () => {
             <Table>
               <TableHeader>
                 <tr>
-                  <TableCell>Регистр</TableCell>
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
+                  <TableCell>Хороо</TableCell>
+                  <TableCell>Утас 1</TableCell>
+                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Регистр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
                   <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Хаяг</TableCell>
                   <TableCell>Байгууллага</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Хаяг</TableCell>
                 </tr>
               </TableHeader>
               <PersonTable
@@ -457,18 +457,18 @@ const Person = () => {
             <Table>
               <TableHeader>
                 <tr>
-                  <TableCell>Регистр</TableCell>
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
+                  <TableCell>Хороо</TableCell>
+                  <TableCell>Утас 1</TableCell>
+                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Регистр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
                   <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Хаяг</TableCell>
                   <TableCell>Байгууллага</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Хаяг</TableCell>
                 </tr>
               </TableHeader>
               <PersonTable
@@ -528,18 +528,18 @@ const Person = () => {
             <Table>
               <TableHeader>
                 <tr>
-                  <TableCell>Регистр</TableCell>
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
+                  <TableCell>Хороо</TableCell>
+                  <TableCell>Утас 1</TableCell>
+                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Регистр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
                   <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Хаяг</TableCell>
                   <TableCell>Байгууллага</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Хаяг</TableCell>
                 </tr>
               </TableHeader>
               <PersonTable
@@ -601,18 +601,18 @@ const Person = () => {
             <Table>
               <TableHeader>
                 <tr>
-                  <TableCell>Регистр</TableCell>
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
+                  <TableCell>Хороо</TableCell>
+                  <TableCell>Утас 1</TableCell>
+                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Регистр</TableCell>
                   <TableCell>Дэмжсэн</TableCell>
                   <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Хаяг</TableCell>
                   <TableCell>Байгууллага</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
+                  <TableCell>Хаяг</TableCell>
                 </tr>
               </TableHeader>
               <PersonTable

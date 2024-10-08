@@ -64,14 +64,6 @@ const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
             <TableCell>
               <div className="flex items-center">
                 <div>
-                  <span className="text-sm">{coupon.REGISTER}</span>{" "}
-                </div>
-              </div>{" "}
-            </TableCell>
-
-            <TableCell>
-              <div className="flex items-center">
-                <div>
                   <span className="text-sm">{coupon.LAST_NAME}</span>{" "}
                 </div>
               </div>{" "}
@@ -81,6 +73,38 @@ const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
               <div className="flex items-center">
                 <div>
                   <span className="text-sm">{coupon.FIRST_NAME}</span>{" "}
+                </div>
+              </div>{" "}
+            </TableCell>
+
+            <TableCell>
+              <div className="flex items-center">
+                <div>
+                  <span className="text-sm">{coupon.NEW_KHOROO}</span>{" "}
+                </div>
+              </div>{" "}
+            </TableCell>
+
+            <TableCell>
+              <div className="flex items-center">
+                <div>
+                  <span className="text-sm">{coupon.PHONE_LAST}</span>{" "}
+                </div>
+              </div>{" "}
+            </TableCell>
+
+            <TableCell>
+              <div className="flex items-center">
+                <div>
+                  <span className="text-sm">{coupon.PHONE2}</span>{" "}
+                </div>
+              </div>{" "}
+            </TableCell>
+
+            <TableCell>
+              <div className="flex items-center">
+                <div>
+                  <span className="text-sm">{coupon.REGISTER}</span>{" "}
                 </div>
               </div>{" "}
             </TableCell>
@@ -130,22 +154,6 @@ const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
             <TableCell>
               <div className="flex items-center">
                 <div>
-                  <span className="text-sm">{coupon.NEW_KHOROO}</span>{" "}
-                </div>
-              </div>{" "}
-            </TableCell>
-
-            <TableCell>
-              <div className="flex items-center">
-                <div>
-                  <span className="text-sm">{coupon.NEW_ADDRESS}</span>{" "}
-                </div>
-              </div>{" "}
-            </TableCell>
-
-            <TableCell>
-              <div className="flex items-center">
-                <div>
                   <span className="text-sm">{coupon.BAIGUULLAGA_NAME}</span>{" "}
                 </div>
               </div>{" "}
@@ -154,15 +162,7 @@ const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
             <TableCell>
               <div className="flex items-center">
                 <div>
-                  <span className="text-sm">{coupon.PHONE_LAST}</span>{" "}
-                </div>
-              </div>{" "}
-            </TableCell>
-
-            <TableCell>
-              <div className="flex items-center">
-                <div>
-                  <span className="text-sm">{coupon.PHONE2}</span>{" "}
+                  <span className="text-sm">{coupon.NEW_ADDRESS}</span>{" "}
                 </div>
               </div>{" "}
             </TableCell>
