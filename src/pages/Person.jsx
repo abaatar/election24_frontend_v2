@@ -43,14 +43,19 @@ const Person = () => {
   const { toggleDrawer, lang } = useContext(SidebarContext);
 
   const [searchRegister, setSearchRegister] = useState("");
+  const [sumNas, setSumNas] = useState(100);
+  const [surNas, setSurNas] = useState(100);
   const [searchAddress, setSearchAddress] = useState("");
   const registerRef = useRef("");
+  const bornSumRef = useRef("");
+  const surNasRef = useRef("");
 
   const [error, setError] = useState("");
   const [data, setData] = useState([]);
   const [familyData, setFamilyData] = useState([]);
   const [baiguullagaData, setBaiguullagaData] = useState([]);
   const [schoolData, setSchoolData] = useState([]);
+  const [bornSumData, setBornSumData] = useState([]);
 
   const getCallback = useCallback(async () => {
     setError("");
@@ -122,6 +127,24 @@ const Person = () => {
   }, [data]);
   //
 
+  // Tursun Sum
+  const getCallback4 = useCallback(async () => {
+    setError("");
+    const q = new URLSearchParams();
+
+    if (data.length > 0) q.append("sum", data[0].BORN_SOUM);
+
+    try {
+      const resp = await CouponServices.getAllCoupons(q);
+      return resp;
+    } catch (err) {
+      setError("Өөр шүүлтүүр нэмнэ үү!");
+    }
+
+    return [];
+  }, [data]);
+  //
+
   const loading = false;
 
   useEffect(() => {
@@ -152,11 +175,28 @@ const Person = () => {
   useEffect(() => {
     async function ff(params) {
       setSchoolData(
-        (await getCallback3()).filter((gg) => gg.REGISTER !== data[0].REGISTER)
+        (await getCallback3()).filter(
+          (gg) =>
+            gg.REGISTER !== data[0].REGISTER &&
+            Math.abs(gg.AGE - data[0].AGE) <= surNas
+        )
       );
     }
     ff();
-  }, [getCallback3]);
+  }, [getCallback3, surNas]);
+
+  useEffect(() => {
+    async function ff(params) {
+      setBornSumData(
+        (await getCallback4()).filter(
+          (gg) =>
+            gg.REGISTER !== data[0].REGISTER &&
+            Math.abs(gg.AGE - data[0].AGE) <= sumNas
+        )
+      );
+    }
+    ff();
+  }, [getCallback4, sumNas]);
 
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
@@ -223,6 +263,21 @@ const Person = () => {
     handleUploadMultiple: handleUploadMultiple3,
     handleRemoveSelectFile: handleRemoveSelectFile3,
   } = useFilter(schoolData);
+
+  const {
+    filename: filename4,
+    isDisabled: isDisabled4,
+    dataTable: dataTable4,
+    serviceData: serviceData4,
+    totalResults: totalResults4,
+    resultsPerPage: resultsPerPage4,
+    handleChangePage: handleChangePage4,
+    handleSelectFile: handleSelectFile4,
+    setSearchCoupon: setSearchCoupon4,
+    handleSubmitCoupon: handleSubmitCoupon4,
+    handleUploadMultiple: handleUploadMultiple4,
+    handleRemoveSelectFile: handleRemoveSelectFile4,
+  } = useFilter(bornSumData);
 
   // handle reset field function
   const handleResetField = () => {
@@ -395,7 +450,78 @@ const Person = () => {
           </TableContainer>
 
           <div className="w-full mx-1">
-            <Button className="h-12 w-full bg-emerald-700">Сургууль</Button>
+            <Button className="h-12 w-full bg-emerald-700">Ажлын газар</Button>
+          </div>
+
+          <TableContainer className="mb-8">
+            <Table>
+              <TableHeader>
+                <tr>
+                  <TableCell>Регистр</TableCell>
+                  <TableCell>Овог</TableCell>
+                  <TableCell>Нэр</TableCell>
+                  <TableCell>Дэмжсэн</TableCell>
+                  <TableCell>Сонгууль</TableCell>
+                  <TableCell>Нас</TableCell>
+                  <TableCell>Хүйс</TableCell>
+                  <TableCell>Хороо</TableCell>
+                  <TableCell>Хаяг</TableCell>
+                  <TableCell>Байгууллага</TableCell>
+                  <TableCell>Утас 1</TableCell>
+                  <TableCell>Утас 2</TableCell>
+                </tr>
+              </TableHeader>
+              <PersonTable
+                lang={lang}
+                isCheck={isCheck}
+                coupons={dataTable2}
+                setIsCheck={setIsCheck}
+              />
+            </Table>
+            <TableFooter>
+              <Pagination
+                totalResults={totalResults2}
+                resultsPerPage={resultsPerPage2}
+                onChange={handleChangePage2}
+                label="Table navigation"
+              />
+            </TableFooter>
+          </TableContainer>
+
+          <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
+            <div className="w-full mx-1">
+              <Button className="h-12 w-full bg-emerald-700">Сургууль</Button>
+            </div>
+
+            <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (surNasRef.current.value) {
+                    setSurNas(surNasRef.current.value);
+                  } else setSurNas(100);
+                }}
+                className="py-3 grid gap-4 lg:gap-6 xl:gap-6 md:flex xl:flex"
+              >
+                <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
+                  <div className="w-full mx-1">
+                    <Input
+                      ref={surNasRef}
+                      type="search"
+                      placeholder={"Нас зай"}
+                    />
+                  </div>
+                  <div className="w-full mx-1">
+                    <Button
+                      type="submit"
+                      className="h-12 w-full bg-emerald-700"
+                    >
+                      Хайх
+                    </Button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
 
           <TableContainer className="mb-8">
@@ -433,8 +559,42 @@ const Person = () => {
             </TableFooter>
           </TableContainer>
 
-          <div className="w-full mx-1">
-            <Button className="h-12 w-full bg-emerald-700">Ажлын газар</Button>
+          <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
+            <div className="w-full mx-1">
+              <Button className="h-12 w-full bg-emerald-700">
+                Төрсөн сум/дүүрэг
+              </Button>
+            </div>
+
+            <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (bornSumRef.current.value) {
+                    setSumNas(bornSumRef.current.value);
+                  } else setSumNas(100);
+                }}
+                className="py-3 grid gap-4 lg:gap-6 xl:gap-6 md:flex xl:flex"
+              >
+                <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
+                  <div className="w-full mx-1">
+                    <Input
+                      ref={bornSumRef}
+                      type="search"
+                      placeholder={"Нас зай"}
+                    />
+                  </div>
+                  <div className="w-full mx-1">
+                    <Button
+                      type="submit"
+                      className="h-12 w-full bg-emerald-700"
+                    >
+                      Хайх
+                    </Button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
 
           <TableContainer className="mb-8">
@@ -458,15 +618,15 @@ const Person = () => {
               <PersonTable
                 lang={lang}
                 isCheck={isCheck}
-                coupons={dataTable2}
+                coupons={dataTable4}
                 setIsCheck={setIsCheck}
               />
             </Table>
             <TableFooter>
               <Pagination
-                totalResults={totalResults2}
-                resultsPerPage={resultsPerPage2}
-                onChange={handleChangePage2}
+                totalResults={totalResults4}
+                resultsPerPage={resultsPerPage4}
+                onChange={handleChangePage4}
                 label="Table navigation"
               />
             </TableFooter>
