@@ -11,6 +11,7 @@ import { SidebarContext } from "@/context/SidebarContext";
 import AttributeServices from "@/services/AttributeServices";
 import CategoryServices from "@/services/CategoryServices";
 import CouponServices from "@/services/CouponServices";
+import PinkServices from "@/services/PinkServices";
 import PenServices from "@/services/PenServices";
 import CurrencyServices from "@/services/CurrencyServices";
 import CustomerServices from "@/services/CustomerServices";
@@ -81,6 +82,14 @@ const couponSchema = {
     // REGISTER: { type: "string" },
   },
 };
+const pinkSchema = {
+  type: "object",
+  properties: {
+    REGISTER: { type: "string" },
+    LAST_NAME: { type: "string" },
+    FIRST_NAME: { type: "string" },
+  },
+};
 const penSchema = {
   type: "object",
   properties: {
@@ -106,6 +115,7 @@ const useFilter = (data) => {
   const [searchText, setSearchText] = useState("");
   const [searchUser, setSearchUser] = useState("");
   const [searchCoupon, setSearchCoupon] = useState("");
+  const [searchPink, setSearchPink] = useState("");
   const [searchPen, setSearchPen] = useState("");
   const [searchOrder, setSearchOrder] = useState("");
   const [categoryType, setCategoryType] = useState("");
@@ -134,6 +144,7 @@ const useFilter = (data) => {
   const searchRef = useRef("");
   const userRef = useRef("");
   const couponRef = useRef("");
+  const pinkRef = useRef("");
   const penRef = useRef("");
   const orderRef = useRef("");
   const categoryRef = useRef("");
@@ -272,6 +283,16 @@ const useFilter = (data) => {
           )
       );
     }
+    //Pink filtering
+    if (searchPink) {
+      services = services?.filter(
+        (search) =>
+          search?.LAST_NAME?.toLowerCase()?.includes(
+            searchPink?.toLowerCase()
+          ) ||
+          search?.FIRST_NAME?.toLowerCase().includes(searchPink?.toLowerCase())
+      );
+    }
     //Pen filtering
     if (searchPen) {
       services = services?.filter(
@@ -343,6 +364,7 @@ const useFilter = (data) => {
     role,
     searchUser,
     searchCoupon,
+    searchPink,
     searchPen,
     status,
     searchOrder,
@@ -382,6 +404,10 @@ const useFilter = (data) => {
   const handleSubmitCoupon = (e) => {
     e.preventDefault();
     setSearchCoupon(couponRef.current.value);
+  };
+  const handleSubmitPink = (e) => {
+    e.preventDefault();
+    setSearchPink(pinkRef.current.value);
   };
   const handleSubmitPen = (e) => {
     e.preventDefault();
@@ -539,6 +565,12 @@ const useFilter = (data) => {
             return value;
           });
         }
+
+        if (location.pathname === "/pinks") {
+          data = text.map((value) => {
+            return value;
+          });
+        }
         if (location.pathname === "/influence") {
           data = text.map((value) => {
             return value;
@@ -596,6 +628,11 @@ const useFilter = (data) => {
         }
 
         if (location.pathname === "/coupons") {
+          data = json.map((value) => {
+            return value;
+          });
+        }
+        if (location.pathname === "/pinks") {
           data = json.map((value) => {
             return value;
           });
@@ -705,6 +742,32 @@ const useFilter = (data) => {
           notifyError("Please enter valid data!");
         }
       }
+      if (location.pathname === "/pinks") {
+        setLoading(true);
+        let attributeDataValidation = selectedFile.map((value) =>
+          ajv.validate(pinkSchema, value)
+        );
+
+        console.log("selectedFile", selectedFile.length);
+
+        const isBelowThreshold = (currentValue) => currentValue === true;
+        const validationData = attributeDataValidation.every(isBelowThreshold);
+
+        if (validationData) {
+          PinkServices.addAllPink(selectedFile.slice(85000, 86399))
+            .then((res) => {
+              setLoading(false);
+              setIsUpdate(true);
+              notifySuccess(res.message);
+            })
+            .catch((err) => {
+              setLoading(false);
+              notifyError(err ? err.response.data.message : err.message);
+            });
+        } else {
+          notifyError("Please enter valid data!");
+        }
+      }
       if (location.pathname === "/influence") {
         setLoading(true);
         let attributeDataValidation = selectedFile.map((value) =>
@@ -784,6 +847,7 @@ const useFilter = (data) => {
     userRef,
     searchRef,
     couponRef,
+    pinkRef,
     penRef,
     orderRef,
     categoryRef,
@@ -822,12 +886,14 @@ const useFilter = (data) => {
     resultsPerPage,
     handleOnDrop,
     setSearchCoupon,
+    setSearchPink,
     setSearchPen,
     setAttributeTitle,
     handleSelectFile,
     handleSubmitUser,
     handleSubmitForAll,
     handleSubmitCoupon,
+    handleSubmitPink,
     handleSubmitPen,
     handleSubmitOrder,
     handleSubmitCategory,

@@ -11,6 +11,7 @@ import { SidebarContext } from "@/context/SidebarContext";
 import AdminServices from "@/services/AdminServices";
 import CategoryServices from "@/services/CategoryServices";
 import CouponServices from "@/services/CouponServices";
+import PinkServices from "@/services/PinkServices";
 import PenServices from "@/services/PenServices";
 import CustomerServices from "@/services/CustomerServices";
 import LanguageServices from "@/services/LanguageServices";
@@ -65,6 +66,27 @@ const DeleteModal = ({ id, ids, setIsCheck, category, title, useParamId }) => {
           setIsSubmitting(false);
         } else {
           const res = await CouponServices.deleteCoupon(id);
+          setIsUpdate(true);
+          notifySuccess(res.message);
+          setServiceId();
+          closeModal();
+          setIsSubmitting(false);
+        }
+      }
+
+      if (location.pathname === "/pinks") {
+        if (ids) {
+          const res = await PinkServices.deleteManyPinks({
+            ids: ids,
+          });
+          setIsUpdate(true);
+          notifySuccess(res.message);
+          setIsCheck([]);
+          setServiceId();
+          closeModal();
+          setIsSubmitting(false);
+        } else {
+          const res = await PinkServices.deletePink(id);
           setIsUpdate(true);
           notifySuccess(res.message);
           setServiceId();

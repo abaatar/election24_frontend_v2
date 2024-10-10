@@ -33,6 +33,11 @@ const sidebar = [
     name: "People", // name that appear in Sidebar
   },
   {
+    path: "/pinks", // the url
+    icon: FiUsers, // icon
+    name: "Pink", // name that appear in Sidebar
+  },
+  {
     path: "/influence", // the url
     icon: FiGlobe, // icon
     name: "Influence", // name that appear in Sidebar
