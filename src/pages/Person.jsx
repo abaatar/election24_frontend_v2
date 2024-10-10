@@ -35,6 +35,8 @@ import AnimatedContent from "@/components/common/AnimatedContent";
 
 import { AdminContext } from "@/context/AdminContext";
 import PersonTable from "@/components/person/PersonTable";
+import { notifyError, notifySuccess, notifyWarning } from "@/utils/toast";
+import PersonTable2 from "@/components/person/PersonTable2";
 
 const Person = () => {
   const { state } = useContext(AdminContext);
@@ -56,6 +58,7 @@ const Person = () => {
   const [baiguullagaData, setBaiguullagaData] = useState([]);
   const [schoolData, setSchoolData] = useState([]);
   const [bornSumData, setBornSumData] = useState([]);
+  const [allData, setAllData] = useState([]);
 
   const getCallback = useCallback(async () => {
     setError("");
@@ -78,10 +81,14 @@ const Person = () => {
     setError("");
     const q = new URLSearchParams();
 
-    if (data.length > 0) q.append("address", data[0].NEW_ADDRESS);
+    if (data.length > 0) {
+      q.append("address", data[0].NEW_ADDRESS);
+      q.append("check", 1);
+    }
 
     try {
       const resp = await CouponServices.getAllCoupons(q);
+      setAllData((g) => g.concat(resp));
       return resp;
     } catch (err) {
       setError("Өөр шүүлтүүр нэмнэ үү!");
@@ -96,10 +103,15 @@ const Person = () => {
     setError("");
     const q = new URLSearchParams();
 
-    if (data.length > 0) q.append("baiguullaga", data[0].BAIGUULLAGA_NAME);
+    if (data.length > 0) {
+      q.append("baiguullaga", data[0].BAIGUULLAGA_NAME);
+      q.append("sage", data[0].AGE);
+      q.append("check", 1);
+    }
 
     try {
       const resp = await CouponServices.getAllCoupons(q);
+      setAllData((g) => g.concat(resp));
       return resp;
     } catch (err) {
       setError("Өөр шүүлтүүр нэмнэ үү!");
@@ -114,10 +126,15 @@ const Person = () => {
     setError("");
     const q = new URLSearchParams();
 
-    if (data.length > 0) q.append("school", data[0].SCHOOL);
+    if (data.length > 0) {
+      q.append("school", data[0].SCHOOL);
+      q.append("sage", data[0].AGE);
+      q.append("check", 1);
+    }
 
     try {
       const resp = await CouponServices.getAllCoupons(q);
+      setAllData((g) => g.concat(resp));
       return resp;
     } catch (err) {
       setError("Өөр шүүлтүүр нэмнэ үү!");
@@ -132,10 +149,18 @@ const Person = () => {
     setError("");
     const q = new URLSearchParams();
 
-    if (data.length > 0) q.append("sum", data[0].BORN_SOUM);
+    if (data.length > 0) {
+      q.append("sum", data[0].BORN_SOUM);
+      q.append("sregister", data[0].REGISTER);
+      q.append("sfirstName", data[0].FIRST_NAME);
+      q.append("slastName", data[0].LAST_NAME);
+      q.append("sage", data[0].AGE);
+      q.append("check", 1);
+    }
 
     try {
       const resp = await CouponServices.getAllCoupons(q);
+      setAllData((g) => g.concat(resp));
       return resp;
     } catch (err) {
       setError("Өөр шүүлтүүр нэмнэ үү!");
@@ -279,6 +304,34 @@ const Person = () => {
     handleRemoveSelectFile: handleRemoveSelectFile4,
   } = useFilter(bornSumData);
 
+  const {
+    filename: filename0,
+    isDisabled: isDisabled0,
+    dataTable: dataTable0,
+    serviceData: serviceData0,
+    totalResults: totalResults0,
+    resultsPerPage: resultsPerPage0,
+    handleChangePage: handleChangePage0,
+    handleSelectFile: handleSelectFile0,
+    setSearchCoupon: setSearchCoupon0,
+    handleSubmitCoupon: handleSubmitCoupon0,
+    handleUploadMultiple: handleUploadMultiple0,
+    handleRemoveSelectFile: handleRemoveSelectFile0,
+  } = useFilter(allData.filter((gg) => gg.REGISTER !== data[0].REGISTER));
+
+  const handleCheck = async (data) => {
+    console.log("dataaaa=", data);
+
+    // res.IS_INF = 1;
+    if (data.IS_AN === 1) {
+      notifyWarning("Бүртгэгдсэн байна!");
+    } else {
+      data.IS_AN = 1;
+      await CouponServices.updateCoupon(data._id, data);
+      notifySuccess("Амжилттай бүртгэгдлээ!");
+    }
+  };
+
   // handle reset field function
   const handleResetField = () => {
     setSearchCoupon("");
@@ -338,6 +391,17 @@ const Person = () => {
                     <span className="text-black dark:text-gray-200">Reset</span>
                   </Button>
                 </div>
+
+                <div className="w-1/6 mx-1">
+                  <Button
+                    layout="outline"
+                    onClick={() => handleCheck(data[0])}
+                    //type="reset"
+                    className="px-4 md:py-1 py-2 h-12 text-sm dark:bg-gray-700"
+                  >
+                    <span className="text-black dark:text-gray-200">Save</span>
+                  </Button>
+                </div>
               </div>
             </form>
           </CardBody>
@@ -355,14 +419,13 @@ const Person = () => {
             <Table>
               <TableHeader>
                 <tr>
+                  <TableCell>check</TableCell>
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
                   <TableCell>Хороо</TableCell>
                   <TableCell>Утас 1</TableCell>
                   <TableCell>Утас 2</TableCell>
                   <TableCell>Регистр</TableCell>
-                  <TableCell>Дэмжсэн</TableCell>
-                  <TableCell>Сонгууль</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
                   <TableCell>Байгууллага</TableCell>
@@ -402,7 +465,7 @@ const Person = () => {
                 </TableCell> */}
                 </tr>
               </TableHeader>
-              <PersonTable
+              <PersonTable2
                 lang={lang}
                 isCheck={isCheck}
                 coupons={dataTable}
@@ -410,227 +473,174 @@ const Person = () => {
               />
             </Table>
           </TableContainer>
-          <div className="w-full mx-1">
-            <Button className="h-12 w-full bg-emerald-700">Гэр бүл</Button>
-          </div>
 
-          <TableContainer className="mb-8">
-            <Table>
-              <TableHeader>
-                <tr>
-                  <TableCell>Овог</TableCell>
-                  <TableCell>Нэр</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
-                  <TableCell>Регистр</TableCell>
-                  <TableCell>Дэмжсэн</TableCell>
-                  <TableCell>Сонгууль</TableCell>
-                  <TableCell>Нас</TableCell>
-                  <TableCell>Хүйс</TableCell>
-                  <TableCell>Байгууллага</TableCell>
-                  <TableCell>Хаяг</TableCell>
-                </tr>
-              </TableHeader>
-              <PersonTable
-                lang={lang}
-                isCheck={isCheck}
-                coupons={dataTable1}
-                setIsCheck={setIsCheck}
-              />
-            </Table>
-            <TableFooter>
-              <Pagination
-                totalResults={totalResults1}
-                resultsPerPage={resultsPerPage1}
-                onChange={handleChangePage1}
-                label="Table navigation"
-              />
-            </TableFooter>
-          </TableContainer>
+          {dataTable4.length > 0 && (
+            <>
+              <div className="w-full mx-1">
+                <Button className="h-12 w-full bg-emerald-700">Гэр бүл</Button>
+              </div>
 
-          <div className="w-full mx-1">
-            <Button className="h-12 w-full bg-emerald-700">Ажлын газар</Button>
-          </div>
+              <TableContainer className="mb-8">
+                <Table>
+                  <TableHeader>
+                    <tr>
+                      <TableCell>Овог</TableCell>
+                      <TableCell>Нэр</TableCell>
+                      <TableCell>Хороо</TableCell>
+                      <TableCell>Утас 1</TableCell>
+                      <TableCell>Утас 2</TableCell>
+                      <TableCell>Регистр</TableCell>
+                      <TableCell>Нас</TableCell>
+                      <TableCell>Хүйс</TableCell>
+                      <TableCell>Байгууллага</TableCell>
+                      <TableCell>Хаяг</TableCell>
+                    </tr>
+                  </TableHeader>
+                  <PersonTable
+                    lang={lang}
+                    isCheck={isCheck}
+                    coupons={dataTable4}
+                    setIsCheck={setIsCheck}
+                  />
+                </Table>
+                <TableFooter>
+                  <Pagination
+                    totalResults={totalResults4}
+                    resultsPerPage={resultsPerPage4}
+                    onChange={handleChangePage4}
+                    label="Table navigation"
+                  />
+                </TableFooter>
+              </TableContainer>
+            </>
+          )}
 
-          <TableContainer className="mb-8">
-            <Table>
-              <TableHeader>
-                <tr>
-                  <TableCell>Овог</TableCell>
-                  <TableCell>Нэр</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
-                  <TableCell>Регистр</TableCell>
-                  <TableCell>Дэмжсэн</TableCell>
-                  <TableCell>Сонгууль</TableCell>
-                  <TableCell>Нас</TableCell>
-                  <TableCell>Хүйс</TableCell>
-                  <TableCell>Байгууллага</TableCell>
-                  <TableCell>Хаяг</TableCell>
-                </tr>
-              </TableHeader>
-              <PersonTable
-                lang={lang}
-                isCheck={isCheck}
-                coupons={dataTable2}
-                setIsCheck={setIsCheck}
-              />
-            </Table>
-            <TableFooter>
-              <Pagination
-                totalResults={totalResults2}
-                resultsPerPage={resultsPerPage2}
-                onChange={handleChangePage2}
-                label="Table navigation"
-              />
-            </TableFooter>
-          </TableContainer>
+          {dataTable1.length > 0 && (
+            <>
+              <div className="w-full mx-1">
+                <Button className="h-12 w-full bg-emerald-700">
+                  Ижил хаяг дээр
+                </Button>
+              </div>
 
-          <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-            <div className="w-full mx-1">
-              <Button className="h-12 w-full bg-emerald-700">Сургууль</Button>
-            </div>
+              <TableContainer className="mb-8">
+                <Table>
+                  <TableHeader>
+                    <tr>
+                      <TableCell>Овог</TableCell>
+                      <TableCell>Нэр</TableCell>
+                      <TableCell>Хороо</TableCell>
+                      <TableCell>Утас 1</TableCell>
+                      <TableCell>Утас 2</TableCell>
+                      <TableCell>Регистр</TableCell>
+                      <TableCell>Нас</TableCell>
+                      <TableCell>Хүйс</TableCell>
+                      <TableCell>Байгууллага</TableCell>
+                      <TableCell>Хаяг</TableCell>
+                    </tr>
+                  </TableHeader>
+                  <PersonTable
+                    lang={lang}
+                    isCheck={isCheck}
+                    coupons={dataTable1}
+                    setIsCheck={setIsCheck}
+                  />
+                </Table>
+                <TableFooter>
+                  <Pagination
+                    totalResults={totalResults1}
+                    resultsPerPage={resultsPerPage1}
+                    onChange={handleChangePage1}
+                    label="Table navigation"
+                  />
+                </TableFooter>
+              </TableContainer>
+            </>
+          )}
 
-            <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (surNasRef.current.value) {
-                    setSurNas(surNasRef.current.value);
-                  } else setSurNas(100);
-                }}
-                className="py-3 grid gap-4 lg:gap-6 xl:gap-6 md:flex xl:flex"
-              >
-                <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-                  <div className="w-full mx-1">
-                    <Input
-                      ref={surNasRef}
-                      type="search"
-                      placeholder={"Нас зай"}
-                    />
-                  </div>
-                  <div className="w-full mx-1">
-                    <Button
-                      type="submit"
-                      className="h-12 w-full bg-emerald-700"
-                    >
-                      Хайх
-                    </Button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+          {dataTable2.length > 0 && (
+            <>
+              <div className="w-full mx-1">
+                <Button className="h-12 w-full bg-emerald-700">
+                  Ажлын газар
+                </Button>
+              </div>
 
-          <TableContainer className="mb-8">
-            <Table>
-              <TableHeader>
-                <tr>
-                  <TableCell>Овог</TableCell>
-                  <TableCell>Нэр</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
-                  <TableCell>Регистр</TableCell>
-                  <TableCell>Дэмжсэн</TableCell>
-                  <TableCell>Сонгууль</TableCell>
-                  <TableCell>Нас</TableCell>
-                  <TableCell>Хүйс</TableCell>
-                  <TableCell>Байгууллага</TableCell>
-                  <TableCell>Хаяг</TableCell>
-                </tr>
-              </TableHeader>
-              <PersonTable
-                lang={lang}
-                isCheck={isCheck}
-                coupons={dataTable3}
-                setIsCheck={setIsCheck}
-              />
-            </Table>
-            <TableFooter>
-              <Pagination
-                totalResults={totalResults3}
-                resultsPerPage={resultsPerPage3}
-                onChange={handleChangePage3}
-                label="Table navigation"
-              />
-            </TableFooter>
-          </TableContainer>
+              <TableContainer className="mb-8">
+                <Table>
+                  <TableHeader>
+                    <tr>
+                      <TableCell>Овог</TableCell>
+                      <TableCell>Нэр</TableCell>
+                      <TableCell>Хороо</TableCell>
+                      <TableCell>Утас 1</TableCell>
+                      <TableCell>Утас 2</TableCell>
+                      <TableCell>Регистр</TableCell>
+                      <TableCell>Нас</TableCell>
+                      <TableCell>Хүйс</TableCell>
+                      <TableCell>Байгууллага</TableCell>
+                      <TableCell>Хаяг</TableCell>
+                    </tr>
+                  </TableHeader>
+                  <PersonTable
+                    lang={lang}
+                    isCheck={isCheck}
+                    coupons={dataTable2}
+                    setIsCheck={setIsCheck}
+                  />
+                </Table>
+                <TableFooter>
+                  <Pagination
+                    totalResults={totalResults2}
+                    resultsPerPage={resultsPerPage2}
+                    onChange={handleChangePage2}
+                    label="Table navigation"
+                  />
+                </TableFooter>
+              </TableContainer>
+            </>
+          )}
 
-          <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-            <div className="w-full mx-1">
-              <Button className="h-12 w-full bg-emerald-700">
-                Төрсөн сум/дүүрэг
-              </Button>
-            </div>
+          {dataTable3.length > 0 && (
+            <>
+              <div className="w-full mx-1">
+                <Button className="h-12 w-full bg-emerald-700">Сургууль</Button>
+              </div>
 
-            <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (bornSumRef.current.value) {
-                    setSumNas(bornSumRef.current.value);
-                  } else setSumNas(100);
-                }}
-                className="py-3 grid gap-4 lg:gap-6 xl:gap-6 md:flex xl:flex"
-              >
-                <div className="flex items-center gap-2 flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-                  <div className="w-full mx-1">
-                    <Input
-                      ref={bornSumRef}
-                      type="search"
-                      placeholder={"Нас зай"}
-                    />
-                  </div>
-                  <div className="w-full mx-1">
-                    <Button
-                      type="submit"
-                      className="h-12 w-full bg-emerald-700"
-                    >
-                      Хайх
-                    </Button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <TableContainer className="mb-8">
-            <Table>
-              <TableHeader>
-                <tr>
-                  <TableCell>Овог</TableCell>
-                  <TableCell>Нэр</TableCell>
-                  <TableCell>Хороо</TableCell>
-                  <TableCell>Утас 1</TableCell>
-                  <TableCell>Утас 2</TableCell>
-                  <TableCell>Регистр</TableCell>
-                  <TableCell>Дэмжсэн</TableCell>
-                  <TableCell>Сонгууль</TableCell>
-                  <TableCell>Нас</TableCell>
-                  <TableCell>Хүйс</TableCell>
-                  <TableCell>Байгууллага</TableCell>
-                  <TableCell>Хаяг</TableCell>
-                </tr>
-              </TableHeader>
-              <PersonTable
-                lang={lang}
-                isCheck={isCheck}
-                coupons={dataTable4}
-                setIsCheck={setIsCheck}
-              />
-            </Table>
-            <TableFooter>
-              <Pagination
-                totalResults={totalResults4}
-                resultsPerPage={resultsPerPage4}
-                onChange={handleChangePage4}
-                label="Table navigation"
-              />
-            </TableFooter>
-          </TableContainer>
+              <TableContainer className="mb-8">
+                <Table>
+                  <TableHeader>
+                    <tr>
+                      <TableCell>Овог</TableCell>
+                      <TableCell>Нэр</TableCell>
+                      <TableCell>Хороо</TableCell>
+                      <TableCell>Утас 1</TableCell>
+                      <TableCell>Утас 2</TableCell>
+                      <TableCell>Регистр</TableCell>
+                      <TableCell>Нас</TableCell>
+                      <TableCell>Хүйс</TableCell>
+                      <TableCell>Байгууллага</TableCell>
+                      <TableCell>Хаяг</TableCell>
+                    </tr>
+                  </TableHeader>
+                  <PersonTable
+                    lang={lang}
+                    isCheck={isCheck}
+                    coupons={dataTable3}
+                    setIsCheck={setIsCheck}
+                  />
+                </Table>
+                <TableFooter>
+                  <Pagination
+                    totalResults={totalResults3}
+                    resultsPerPage={resultsPerPage3}
+                    onChange={handleChangePage3}
+                    label="Table navigation"
+                  />
+                </TableFooter>
+              </TableContainer>
+            </>
+          )}
         </>
       ) : (
         <NotFound title="Илэрч олдсонгүй." />

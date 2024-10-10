@@ -20,7 +20,7 @@ import ShowHideButton from "@/components/table/ShowHideButton";
 import EditDeleteButton from "@/components/table/EditDeleteButton";
 import AnimatedContent from "@/components/common/AnimatedContent";
 
-const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
+const PersonTable2 = ({ isCheck, coupons, setIsCheck }) => {
   const [updatedCoupons, setUpdatedCoupons] = useState([]);
 
   const { title, serviceId, handleModalOpen, handleUpdate } = useToggleDrawer();
@@ -61,6 +61,18 @@ const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
       <TableBody>
         {updatedCoupons?.map((coupon, i) => (
           <TableRow key={i + 1}>
+            <TableCell>
+              <div className="flex items-center">
+                <div>
+                  {coupon.IS_AN === 1 ? (
+                    <span className="text-sm text-green-500">тийм</span>
+                  ) : (
+                    <span className="text-sm text-gray-500">үгүй</span>
+                  )}
+                </div>
+              </div>{" "}
+            </TableCell>
+
             <TableCell>
               <div className="flex items-center">
                 <div>
@@ -344,4 +356,4 @@ const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
   );
 };
 
-export default PersonTable;
+export default PersonTable2;
