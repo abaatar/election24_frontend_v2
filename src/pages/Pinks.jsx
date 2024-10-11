@@ -48,6 +48,7 @@ const Pinks = () => {
   const [searchAddress, setSearchAddress] = useState("");
   const [searchSum, setSearchSum] = useState("");
   const [searchPhone, setSearchPhone] = useState("");
+  const [searchBaiguul, setSearchBaiguul] = useState("");
   const [searchIsInf, setSearchIsInf] = useState(-1);
   const [searchIsMan, setSearchIsMan] = useState(-1);
   const [searchIsAn, setSearchIsAn] = useState(-1);
@@ -58,6 +59,7 @@ const Pinks = () => {
   const horooRef = useRef("");
   const addressRef = useRef("");
   const sumRef = useRef("");
+  const baiguulRef = useRef("");
   const phoneRef = useRef("");
   const isInfRef = useRef("");
   const isManRef = useRef("");
@@ -76,6 +78,7 @@ const Pinks = () => {
     q.append("address", searchAddress);
     q.append("sum", searchSum);
     q.append("phone", searchPhone);
+    q.append("baiguullaga", searchBaiguul);
     q.append("isInf", searchIsInf);
     q.append("isMan", searchIsMan);
     q.append("isAn", searchIsAn);
@@ -95,6 +98,7 @@ const Pinks = () => {
     searchHoroo,
     searchAddress,
     searchSum,
+    searchBaiguul,
     searchPhone,
     searchIsInf,
     searchIsMan,
@@ -148,6 +152,7 @@ const Pinks = () => {
     lastNameRef.current.value = "";
     firstNameRef.current.value = "";
     horooRef.current.value = "";
+    baiguulRef.current.value = "";
     addressRef.current.value = "";
     sumRef.current.value = "";
     phoneRef.current.value = "";
@@ -317,6 +322,7 @@ const Pinks = () => {
                 setSearchLastName(lastNameRef.current.value);
                 setSearchFirstName(firstNameRef.current.value);
                 setSearchHoroo(horooRef.current.value);
+                setSearchBaiguul(baiguulRef.current.value);
                 setSearchAddress(addressRef.current.value);
                 setSearchSum(sumRef.current.value);
                 setSearchPhone(phoneRef.current.value);
@@ -344,6 +350,14 @@ const Pinks = () => {
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
                 <Input ref={horooRef} type="search" placeholder={"Хороо"} />
+              </div>
+
+              <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
+                <Input
+                  ref={baiguulRef}
+                  type="search"
+                  placeholder={"Байгууллага"}
+                />
               </div>
 
               <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
