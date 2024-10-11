@@ -64,6 +64,18 @@ const PersonTable = ({ isCheck, coupons, setIsCheck }) => {
             <TableCell>
               <div className="flex items-center">
                 <div>
+                  {coupon.IS_INF === 1 ? (
+                    <span className="text-sm text-green-500">тийм</span>
+                  ) : (
+                    <span className="text-sm text-gray-500">үгүй</span>
+                  )}
+                </div>
+              </div>{" "}
+            </TableCell>
+
+            <TableCell>
+              <div className="flex items-center">
+                <div>
                   <span className="text-sm">{coupon.LAST_NAME}</span>{" "}
                 </div>
               </div>{" "}

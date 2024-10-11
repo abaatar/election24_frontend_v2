@@ -420,6 +420,7 @@ const Person = () => {
               <TableHeader>
                 <tr>
                   <TableCell>check</TableCell>
+                  <TableCell>is_inf</TableCell>
                   <TableCell>Овог</TableCell>
                   <TableCell>Нэр</TableCell>
                   <TableCell>Хороо</TableCell>
@@ -484,6 +485,7 @@ const Person = () => {
                 <Table>
                   <TableHeader>
                     <tr>
+                      <TableCell>is_inf</TableCell>
                       <TableCell>Овог</TableCell>
                       <TableCell>Нэр</TableCell>
                       <TableCell>Хороо</TableCell>
@@ -527,6 +529,7 @@ const Person = () => {
                 <Table>
                   <TableHeader>
                     <tr>
+                      <TableCell>is_inf</TableCell>
                       <TableCell>Овог</TableCell>
                       <TableCell>Нэр</TableCell>
                       <TableCell>Хороо</TableCell>
@@ -570,6 +573,7 @@ const Person = () => {
                 <Table>
                   <TableHeader>
                     <tr>
+                      <TableCell>is_inf</TableCell>
                       <TableCell>Овог</TableCell>
                       <TableCell>Нэр</TableCell>
                       <TableCell>Хороо</TableCell>
@@ -611,6 +615,7 @@ const Person = () => {
                 <Table>
                   <TableHeader>
                     <tr>
+                      <TableCell>is_inf</TableCell>
                       <TableCell>Овог</TableCell>
                       <TableCell>Нэр</TableCell>
                       <TableCell>Хороо</TableCell>
