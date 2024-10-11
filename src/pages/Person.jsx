@@ -427,6 +427,8 @@ const Person = () => {
                   <TableCell>Утас 1</TableCell>
                   <TableCell>Утас 2</TableCell>
                   <TableCell>Регистр</TableCell>
+                  <TableCell>Үүр</TableCell>
+                  <TableCell>Сонгуулийн байршил</TableCell>
                   <TableCell>Нас</TableCell>
                   <TableCell>Хүйс</TableCell>
                   <TableCell>Байгууллага</TableCell>
@@ -492,6 +494,8 @@ const Person = () => {
                       <TableCell>Утас 1</TableCell>
                       <TableCell>Утас 2</TableCell>
                       <TableCell>Регистр</TableCell>
+                      <TableCell>Үүр</TableCell>
+                      <TableCell>Сонгуулийн байршил</TableCell>
                       <TableCell>Нас</TableCell>
                       <TableCell>Хүйс</TableCell>
                       <TableCell>Байгууллага</TableCell>
@@ -536,6 +540,8 @@ const Person = () => {
                       <TableCell>Утас 1</TableCell>
                       <TableCell>Утас 2</TableCell>
                       <TableCell>Регистр</TableCell>
+                      <TableCell>Үүр</TableCell>
+                      <TableCell>Сонгуулийн байршил</TableCell>
                       <TableCell>Нас</TableCell>
                       <TableCell>Хүйс</TableCell>
                       <TableCell>Байгууллага</TableCell>
@@ -580,6 +586,8 @@ const Person = () => {
                       <TableCell>Утас 1</TableCell>
                       <TableCell>Утас 2</TableCell>
                       <TableCell>Регистр</TableCell>
+                      <TableCell>Үүр</TableCell>
+                      <TableCell>Сонгуулийн байршил</TableCell>
                       <TableCell>Нас</TableCell>
                       <TableCell>Хүйс</TableCell>
                       <TableCell>Байгууллага</TableCell>
@@ -622,6 +630,8 @@ const Person = () => {
                       <TableCell>Утас 1</TableCell>
                       <TableCell>Утас 2</TableCell>
                       <TableCell>Регистр</TableCell>
+                      <TableCell>Үүр</TableCell>
+                      <TableCell>Сонгуулийн байршил</TableCell>
                       <TableCell>Нас</TableCell>
                       <TableCell>Хүйс</TableCell>
                       <TableCell>Байгууллага</TableCell>

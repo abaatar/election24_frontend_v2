@@ -133,6 +133,22 @@ const PersonTable2 = ({ isCheck, coupons, setIsCheck }) => {
               </div>{" "}
             </TableCell>
 
+            <TableCell>
+              <div className="flex items-center">
+                <div>
+                  <span className="text-sm">{coupon.UUR}</span>{" "}
+                </div>
+              </div>{" "}
+            </TableCell>
+
+            <TableCell>
+              <div className="flex items-center">
+                <div>
+                  <span className="text-sm">{coupon.SONGUULIIN_BAIRSHIL}</span>{" "}
+                </div>
+              </div>{" "}
+            </TableCell>
+
             {/* <TableCell>
               <div className="flex items-center">
                 <div>
